@@ -1,7 +1,8 @@
 function angler_color_test; set_color -o fee; end
 
 function fish_right_prompt
-	if [ "$CMD_DURATION" -lt 100 ]; and return
+	if [ "$CMD_DURATION" -lt 100 ]
+		printf (angler_color_test)' '
 	else if [ "$CMD_DURATION" -lt 1000 ]
 		printf (angler_color_test)$CMD_DURATION'ms '
 	else if [ "$CMD_DURATION" -lt 60000 ]
@@ -11,4 +12,6 @@ function fish_right_prompt
 	else
 		printf (angler_color_test)(math "scale=1;$CMD_DURATION/3600000")'h '
 	end
+
+	printf (date +%H:%M:%S)
 end
