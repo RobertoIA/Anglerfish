@@ -1,5 +1,3 @@
-function angler_color_test; set_color -o fee; end
-
 function angler_elapsed
 	if [ "$CMD_DURATION" -lt 100 ]; return
 	else if [ "$CMD_DURATION" -lt 1000 ]
@@ -17,9 +15,16 @@ function angler_current
 	echo -ns (date +%H:%M:%S)
 end
 
+function angler_pyenv
+	if test "$VIRTUAL_ENV"
+		echo -ns ''(basename "$VIRTUAL_ENV")''
+	end
+end
+
 function fish_right_prompt
 	set -l elapsed (angler_elapsed)
 	set -l current (angler_current)
+	set -l pyenv (angler_pyenv)
 
-	printf (angler_color_test)"$elapsed $current"
+	printf "$elapsed $pyenv $current"
 end
