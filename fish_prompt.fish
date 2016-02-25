@@ -16,6 +16,10 @@ function angler_dir
 	end
 end
 
+function angler_branch
+	echo -ns " "(command git rev-parse --abbrev-ref HEAD 2> /dev/null)
+end
+
 function fish_prompt
-	printf (set_color blue)"╭"(set_color yellow)"☼ "(set_color normal)(angler_dir)" "
+	printf (set_color blue)"╭"(set_color yellow)"☼ "(set_color normal)(angler_dir)" "(angler_branch)" "
 end
