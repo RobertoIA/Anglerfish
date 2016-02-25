@@ -7,12 +7,12 @@ function angler_dir
 		
 		if [ -n "$folder" ]
 			set -l short_path (echo -ns "$path/$folder" | sed -e "s/\([^\/]\)[^\/]*\//\1\//g")
-			echo -ns "$short_path"
+			echo -ns "$short_path "
 		else
-			echo -ns "$path"
+			echo -ns "$path "
 		end
 	else
-		echo -ns (prompt_pwd)
+		echo -ns (prompt_pwd)" "
 	end
 end
 
