@@ -21,10 +21,30 @@ function angler_pyenv
 	end
 end
 
+function angler_git
+	set -l ahead_behind (command git rev-list --left-right --count origin/master...master ^/dev/null)
+
+	switch "$ahead_behind"
+		case ''
+		case '0	0'; return
+		case '*	0'
+			set -l behind (echo "$ahead_behind" | grep -Eo [0-9]+ | head -1)
+			echo -ns "↘$behind"
+		case '0	*'
+			set -l ahead (echo "$ahead_behind" | grep -Eo [0-9]+ | tail -1)
+			echo -ns "↖$ahead"
+		case '*'
+			set -l ahead (echo "$ahead_behind" | grep -Eo [0-9]+ | tail -1)
+			set -l behind (echo "$ahead_behind" | grep -Eo [0-9]+ | head -1)
+			echo -ns "↖$ahead↘$behind"
+	end
+end
+
 function fish_right_prompt
 	set -l elapsed (angler_elapsed)
 	set -l current (angler_current)
 	set -l pyenv (angler_pyenv)
+	set -l git (angler_git)
 
-	printf "$elapsed $pyenv $current"
+	printf "$elapsed $pyenv $current $git"
 end
