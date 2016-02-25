@@ -23,10 +23,11 @@ end
 
 function angler_git
 	set -l ahead_behind (command git rev-list --left-right --count origin/master...master ^/dev/null)
+	set -l dirty (command git status --porcelain --ignore-submodules=dirty)
 
 	switch "$ahead_behind"
 		case ''
-		case '0	0'; return
+		case '0	0'; echo -ns ''
 		case '*	0'
 			set -l behind (echo "$ahead_behind" | grep -Eo [0-9]+ | head -1)
 			echo -ns "↘$behind"
@@ -38,6 +39,8 @@ function angler_git
 			set -l behind (echo "$ahead_behind" | grep -Eo [0-9]+ | head -1)
 			echo -ns "↖$ahead↘$behind"
 	end
+
+	if [ -n "$dirty" ]; echo -ns '‼'; end
 end
 
 function fish_right_prompt
