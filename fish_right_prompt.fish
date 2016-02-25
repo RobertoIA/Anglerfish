@@ -23,7 +23,7 @@ end
 
 function angler_git
 	set -l ahead_behind (command git rev-list --left-right --count origin/master...master ^/dev/null)
-	set -l dirty (command git status --porcelain --ignore-submodules=dirty)
+	set -l dirty (command git status --porcelain --ignore-submodules=dirty 2> /dev/null)
 
 	switch "$ahead_behind"
 		case ''
