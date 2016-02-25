@@ -12,12 +12,12 @@ function angler_elapsed
 end
 
 function angler_current
-	echo -ns (date +%H:%M:%S)
+	echo -ns " "(date +%H:%M:%S)
 end
 
 function angler_pyenv
 	if test "$VIRTUAL_ENV"
-		echo -ns ''(basename "$VIRTUAL_ENV")''
+		echo -ns " "(basename "$VIRTUAL_ENV")
 	end
 end
 
@@ -30,17 +30,17 @@ function angler_git
 		case '0	0'; echo -ns ''
 		case '*	0'
 			set -l behind (echo "$ahead_behind" | grep -Eo [0-9]+ | head -1)
-			echo -ns "↘$behind"
+			echo -ns " ↘$behind"
 		case '0	*'
 			set -l ahead (echo "$ahead_behind" | grep -Eo [0-9]+ | tail -1)
-			echo -ns "↖$ahead"
+			echo -ns " ↖$ahead"
 		case '*'
 			set -l ahead (echo "$ahead_behind" | grep -Eo [0-9]+ | tail -1)
 			set -l behind (echo "$ahead_behind" | grep -Eo [0-9]+ | head -1)
-			echo -ns "↖$ahead↘$behind"
+			echo -ns " ↖$ahead↘$behind"
 	end
 
-	if [ -n "$dirty" ]; echo -ns '‼'; end
+	if [ -n "$dirty" ]; echo -ns ' ‼'; end
 end
 
 function fish_right_prompt
@@ -49,5 +49,5 @@ function fish_right_prompt
 	set -l pyenv (angler_pyenv)
 	set -l git (angler_git)
 
-	printf "$elapsed $pyenv $current $git"
+	printf "$elapsed$pyenv$current$git"
 end
