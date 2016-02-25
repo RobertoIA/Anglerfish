@@ -20,6 +20,16 @@ function angler_branch
 	echo -ns " "(command git rev-parse --abbrev-ref HEAD 2> /dev/null)
 end
 
+function angler_lure
+	echo -ns (set_color blue)"╭"
+	if [ "$argv[1]" -eq 0 ];
+		echo -ns (set_color yellow)"☼ "
+	else
+		echo -ns (set_color red)"☼ "
+	end
+	set_color normal
+end
+
 function fish_prompt
-	printf (set_color blue)"╭"(set_color yellow)"☼ "(set_color normal)(angler_dir)" "(angler_branch)" "
+	printf (angler_lure $status)(angler_dir)(angler_branch)" "
 end
