@@ -23,9 +23,9 @@ end
 function angler_lure
 	echo -ns (set_color blue)"╭"
 	if [ "$argv[1]" -eq 0 ];
-		echo -ns (set_color yellow)"☼ "
+		echo -ns (set_color yellow)"☼  "
 	else
-		echo -ns (set_color red)"☼ "
+		echo -ns (set_color red)"☼⌁ "
 	end
 	set_color normal
 end
