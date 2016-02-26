@@ -31,5 +31,8 @@ function angler_lure
 end
 
 function fish_prompt
-	printf (angler_lure $status)(angler_dir)(angler_branch)" "
+	angler_lure $status
+	angler_dir
+	angler_branch
+	echo -ns ' '
 end

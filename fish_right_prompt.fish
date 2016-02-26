@@ -44,10 +44,8 @@ function angler_git
 end
 
 function fish_right_prompt
-	set -l elapsed (angler_elapsed)
-	set -l current (angler_current)
-	set -l pyenv (angler_pyenv)
-	set -l git (angler_git)
-
-	printf "$elapsed$pyenv$current$git"
+	angler_elapsed
+	angler_current
+	angler_pyenv
+	angler_git
 end
