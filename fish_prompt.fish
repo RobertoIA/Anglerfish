@@ -4,6 +4,10 @@ function angler_cl_off; set_color -o b58900; end
 function angler_cl_on; set_color -o dc322f; end
 function angler_cl_path; set_color 1b85b8; end
 function angler_cl_git; set_color 559e83; end
+function angler_cl_env; set_color ae5a41; end
+function angler_cl_elap; set_color 5a5255; end
+function angler_cl_time; set_color 1b85b8; end
+function angler_cl_comm; set_color 559e83; end
 
 function angler_dir
 	set -l project (command git rev-parse --show-toplevel 2> /dev/null)
